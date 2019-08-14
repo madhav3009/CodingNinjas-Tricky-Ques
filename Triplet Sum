@@ -1,0 +1,57 @@
+void FindTriplet(int arr[], int size, int x) 
+{
+   int temp=0,i,j,k;
+   for( i=0;i<size;i++)
+  {
+      for(j=i+1;j<size;j++) 
+       {
+         temp=arr[i]+arr[j];
+         for( k=j+1;k<size;k++)
+         { 
+           if(temp+arr[k]==x)
+              {
+                  if(arr[i]>=arr[j] && arr[i]>=arr[k]) 
+                   {
+                      if( arr[j]>=arr[k] )
+                         {
+                            cout<<arr[k]<<" "<<arr[j]<<" "<<arr[i]<<endl;
+                           }
+                       else 
+                          
+                          {
+                            cout<<arr[j]<<" "<<arr[k]<<" "<<arr[i]<<endl;
+                           }
+                    }
+        
+                 else if(arr[j]>=arr[i] && arr[j]>=arr[k] )
+                   {
+                      if(arr[i]>=arr[k])
+                       {
+                         cout<<arr[k]<<" "<<arr[i]<<" "<<arr[j]<<endl;
+                        }
+                       else 
+                       {
+                         cout<<arr[i]<<" "<<arr[k]<<" "<<arr[j]<<endl;
+                        }
+                 
+                    }
+                 else if(arr[k]>=arr[i] && arr[k]>=arr[j])
+           
+                  {
+                      if(arr[i]>=arr[j])
+                      {
+                       cout<<arr[j]<<" "<<arr[i]<<" "<<arr[k]<<endl;       
+                      }
+             
+                       else 
+                      {
+                        cout<<arr[i]<<" "<<arr[j]<<" "<<arr[k]<<endl;
+                       }
+                  }      
+      
+             }
+          }
+
+        }
+     }
+}
