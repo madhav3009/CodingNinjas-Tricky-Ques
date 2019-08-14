@@ -1,0 +1,42 @@
+#include<iostream>
+using namespace std;
+#include <climits>
+
+
+int main(){
+  
+int max=INT_MIN,secmax=INT_MIN;
+
+    int n;
+    int arr[n];
+    cin>>n;
+    for(int i=0;i<n;i++)
+    {
+        cin>>arr[i];
+    }
+    
+    for(int i=0;i<n;i++)
+    {
+        if(arr[i]>max)
+        {
+            secmax=max;
+            max=arr[i];
+        }
+        
+        else if(arr[i]>secmax && arr[i]!=max)
+        {
+            secmax=arr[i];
+        }
+        
+        
+    }
+    
+    cout<<secmax;
+    
+    
+  
+      // Write your code here
+    
+}
+
+
