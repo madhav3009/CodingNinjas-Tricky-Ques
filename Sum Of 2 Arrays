@@ -1,0 +1,39 @@
+void sumOfTwoArrays(int input1[], int size1, int input2[], int size2, int output[]) 
+{
+  int carry=0;
+  int l=size1;
+    
+  if(l<=size2)
+   {
+    l=size2;
+   }
+    
+  int i=size1-1;
+  int j=size2-1;
+  while(i>=0 && j>=0){
+    int s =input1[i] + input2[j] + carry;
+    output[l]=s%10;
+    carry = s/10;
+    i--;
+    j--;
+    l--;
+  }
+  while(i>=0){
+    int s =input1[i] + carry;
+    output[l]=s%10;
+    carry = s/10;
+    i--;
+    l--;
+  }
+  while(j>=0){
+    int s =input2[j] + carry;
+    output[l]=s%10;
+    carry = s/10;
+    j--;
+    l--;
+  }
+if(carry!=0)
+ output[0]=0;
+else
+ output[0]=carry;
+}
