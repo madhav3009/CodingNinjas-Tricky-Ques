@@ -1,0 +1,31 @@
+
+Sample Input 1 :
+xyz
+Sample Output 1 :
+x
+xy
+xyz
+y
+yz
+z
+
+
+void printSubstrings(char str[]){
+ 
+   char output[1000];
+    for(int i=0;str[i]!='\0';i++)
+    {
+        for(int j=i;str[j]!='\0';j++)
+        {    int k=0;
+            int start=i,end=j;
+            for(int l=start;l<=end;l++)
+            {
+                output[k++]=str[l];
+             }
+            output[k]='\0';
+         cout<<output;
+            cout<<endl;
+          }
+       }
+    }
+
