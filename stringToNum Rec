@@ -1,0 +1,32 @@
+Sample Input 1 :
+1231
+Sample Output 1:
+1231
+
+#include<cstring>
+#include<cmath>
+
+int helper(char input[],int last)
+{
+     
+    if(last==0)
+  {
+    return input[last]-'0';
+  }
+    
+ 
+ 
+  int a=helper(input,last-1);
+  int b=input[last]-'0';
+  return a*10 + b;
+  
+}
+
+
+int stringToNumber(char input[]) {
+int len=strlen(input);
+return helper(input,len-1);
+    
+}
+
+
