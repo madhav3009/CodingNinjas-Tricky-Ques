@@ -1,0 +1,46 @@
+void Merge(int input[],int si,int ei)
+{
+ int SIZE=ei-si+1;
+ int mid=(si+ei)/2;
+ int * temp=new int [SIZE] ;
+ int a=si,b=mid,c=mid+1,d=ei,e=0; 
+ while(a<=b && c<=d){
+   if(input[a]<input[c])
+   {
+     temp[e++]=input[a++];
+   }
+   else
+     temp[e++]=input[c++];
+  }
+  while(a<=b)
+  {
+    temp[e++]=input[a++];
+  }
+  while(c<=d)
+  {
+    temp[e++]=input[c++];
+  }
+  int x=0;
+  for(int i=si;i<=ei;)
+  {
+    input[i++]=temp[x++];
+  }
+  delete [] temp;
+}
+
+void MergeSort(int input[],int si ,int ei){
+  int mid=(si+ei)/2;
+  if(si>=ei)
+    return;
+  MergeSort(input,si,mid);
+  MergeSort(input,mid+1,ei);
+  Merge(input,si,ei);
+}
+void mergeSort(int input[], int size){
+  if(size<=1)
+    return;
+  int si=0,ei=size-1;
+  MergeSort(input,si,ei);
+	// Write your code here
+        
+}
