@@ -1,0 +1,48 @@
+Sample Input:
+23
+Sample Output:
+ad
+ae
+af
+bd
+be
+bf
+cd
+ce
+cf
+
+#include <iostream>
+#include <string>
+using namespace std;
+
+void printKeypad(int num ,string outputSoFar,string option[]){
+
+    if(num==0)
+    {
+        cout<<outputSoFar<<endl;
+        return;
+        
+    }
+    
+    int ld=num%10;
+    int sn=num/10;
+    string op = option[ld];
+    
+    int k=0;
+    
+    for(int i=0;i<op.length();i++)
+    {
+        printKeypad(sn,op[i]+outputSoFar,option);
+        
+    }
+    
+    
+    
+}
+
+void printKeypad(int num){
+  string option[]={" "," ","abc","def","ghi","jkl","mno","pqrs","tuv","wxyz"};
+  string output="";
+  printKeypad(num,output,option);
+  
+ }
