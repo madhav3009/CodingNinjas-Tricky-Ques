@@ -1,0 +1,53 @@
+Sample Input:
+23
+Sample Output:
+ad
+ae
+af
+bd
+be
+bf
+cd
+ce
+cf
+
+
+#include <string>
+using namespace std;
+
+int keypadHelper(int num,string output[],string options[]){
+    
+   if(num==0)
+   {
+       output[0]="";
+       return 1;
+    }    
+    
+    
+    int ld=num%10;
+    int sn=num/10;
+    string soutput[1000];
+    string op=options[ld];
+    int sOSize=keypadHelper(sn,soutput,options);
+    
+    
+    int k=0;
+    
+    for(int i=0;i<op.length();i++)
+    {
+        for(int j=0;j<sOSize;j++)
+        {
+
+        output[k++]=soutput[j]+op[i];
+        }
+    }
+    
+    return k;
+}
+
+int keypad(int num, string output[])
+{
+   
+    string options [] = {"","","abc","def","ghi","jkl","mno","pqrs","tuv","wxyz"};
+    return keypadHelper(num,output,options);
+}
