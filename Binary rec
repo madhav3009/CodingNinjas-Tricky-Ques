@@ -1,0 +1,30 @@
+Sample Input :
+6
+2 3 4 5 6 8 
+5 
+Sample Output:
+3 
+
+
+int bsearch(int input[],int si,int ei,int element){
+if(si>=ei){
+  return -1;
+}
+  
+  int mid=(si+ei)/2;
+  if(input[mid]==element){
+    return mid;
+  }
+  else if(input[mid]>element){
+   return  bsearch(input,si,mid-1,element);
+  }
+  else if(input[mid]<element){
+    return bsearch(input,mid+1,ei,element);
+  }
+}
+
+int binarySearch(int input[], int size, int element) {
+  int si=0,ei=size-1;
+ return bsearch(input,si,ei,element);
+
+}
