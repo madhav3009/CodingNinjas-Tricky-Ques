@@ -1,0 +1,17 @@
+Sample Input:
+9
+0 7 2 5 4 7 1 3 6
+Sample Output:
+7
+
+
+int MissingNumber(int arr[], int size){
+  int sum=0;
+  for(int i=0;i<size;i++)
+  {
+  sum+=arr[i];
+  }
+  int oSum=(size-2)*(size-1)/2;
+  return sum-oSum;
+ }
+
