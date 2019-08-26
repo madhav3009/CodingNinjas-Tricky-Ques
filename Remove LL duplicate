@@ -1,0 +1,32 @@
+Sample Input 1 :
+1 2 3 3 3 4 4 5 5 5 7 -1
+Sample Output 1 :
+1 2 3 4 5 7
+
+node* eliminate_duplicate(node* head)
+{
+  node *t1=head;
+  node *t2=head;
+  t2=head->next;
+  
+  if(t1==NULL || t2==NULL)
+    return head;
+  
+  while(t2!=NULL)
+  {
+    if(t1->data!=t2->data)
+    {
+      t1->next=t2;
+      t1=t2;
+      t2=t2->next;
+    }
+    else{
+      t2=t2->next;
+    }
+  }
+  
+  t1->next=NULL;
+  return head;
+    
+  }
+
