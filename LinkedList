@@ -1,0 +1,186 @@
+#include <iostream>
+using namespace std;
+class Node{
+public:
+    int data;
+    Node * next;
+
+    Node(int data)
+    {
+        this->data=data;
+        this->next=NULL;
+
+    }
+};
+Node* takeInput_Better() {
+	int data;
+	cin >> data;
+	Node *head = NULL;
+	Node *tail = NULL;
+	while(data != -1) {
+		Node *newNode = new Node(data);
+		if(head == NULL) {
+			head = newNode;
+			tail = newNode;
+		}
+		else {
+			tail -> next = newNode;
+			tail = tail -> next;
+			}
+
+		cin >> data;
+	}
+	return head;
+}
+
+Node* insertNode(Node *head, int i, int data) {
+	Node *newNode = new Node(data);
+	int count = 0;
+	Node *temp = head;
+
+	if(i == 0) {
+		newNode -> next = head;
+		head = newNode;
+		return head;
+	}
+
+	while(temp != NULL && count < i - 1) {
+		temp = temp -> next;
+		count++;
+	}
+	if(temp != NULL) {
+		Node *a = temp -> next;
+		temp -> next = newNode;
+		newNode -> next = a;
+	}
+	return head;
+}
+
+Node* deleteNode(Node *head, int i) {
+  Node* temp=head;
+    if(i==0)
+    {
+    head=head->next;
+    delete temp;
+    return head;
+    }
+
+
+
+   for(int j=0;temp!=NULL && j<i-1;j++)
+   {
+       temp=temp->next;
+   }
+
+   if(temp->next!=NULL)
+    {
+        Node *a = temp->next;
+        temp->next=a->next;
+        delete a;
+
+    }
+
+return head;
+}
+
+
+Node * insertRec(Node *head , int i, int data)
+{
+    Node *newNode = new Node(data);
+    if(head==NULL)
+    {
+        if(i==0)
+        {
+        head=newNode;
+        return head;
+        }
+    }
+
+   if(i==0)
+   {
+
+       newNode->next=head;
+       head=newNode;
+       return head;
+   }
+
+   else{
+    Node * a = insertRec(head->next,i-1,data);
+    head->next=a;
+   }
+
+
+
+
+    return head;
+
+}
+
+
+
+Node * deleteRec(Node *head , int i)
+{
+   if(head==NULL)
+    return head;
+
+    if(i==0)
+    {
+        Node*temp=head;
+        head=head->next;
+        delete temp;
+        return head;
+
+    }
+
+    else{
+        Node * t= deleteRec(head->next,i-1);
+        head->next=t;
+
+    }
+    return head;
+
+}
+
+
+
+
+
+void print(Node *head) {
+	while(head != NULL) {
+		cout << head -> data << " ";
+		head = head -> next;
+	}
+}
+
+int main() {
+    cout<<"Enter datas "<<endl;
+	Node *head = takeInput_Better();
+	print(head);
+
+    cout<<endl<<"Insert At ith Pos";
+	int i, data;
+	cin >> i >> data;
+	head = insertNode(head, i, data);
+	print(head);
+
+    cout<<endl<<"Delete At ith Pos";
+    cin>>i;
+    head=deleteNode(head,i);
+    print(head);
+
+    cout<<endl<<"Insert At  REC ith Pos";
+
+	cin >> i >> data;
+
+    head=insertRec(head,i,data);
+    print(head);
+    cout<<endl<<"Delete At REC ith Pos";
+    cin>>i;
+
+    head=deleteRec(head,i);
+    print(head);
+
+return 0;
+}
+
+
