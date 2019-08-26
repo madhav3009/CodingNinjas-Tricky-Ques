@@ -9,9 +9,7 @@ node* eliminate_duplicate(node* head)
   node *t2=head;
   t2=head->next;
   
-  if(t1==NULL || t2==NULL)
-    return head;
-  
+ 
   while(t2!=NULL)
   {
     if(t1->data!=t2->data)
