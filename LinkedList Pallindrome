@@ -1,0 +1,61 @@
+Sample Input 2 :
+0 2 3 2 5 -1
+Sample Output 2 :
+false
+
+node * reverse(node *m)
+{
+  node *prev=NULL;
+  node *current=m;
+  node *forward=NULL;
+  while(current!=NULL)
+  {
+   forward=current->next;
+   current->next=prev;
+   prev=current;
+   current=forward;
+  }
+return prev;
+}
+
+node * mid(node *head)
+
+{
+  
+  node * fast=head->next;
+  node * slow=head;
+  
+   if(head==NULL||head->next==NULL)
+   return head;
+  else
+  {
+    
+    while(fast!=NULL && fast->next!=NULL){
+      fast=fast->next->next;
+      slow=slow->next;
+    }
+  }
+  return slow;
+}
+bool check_palindrome(node* head)
+  
+{
+  node * m =mid(head);
+  node * r=reverse(m);
+  
+    
+    while(head!=NULL)
+    {
+    if(head->data!=r->data)
+    {
+      return false;
+    }
+    else
+    {
+      head=head->next;
+      r=r->next;
+    }
+   }
+ return true;
+}
+
