@@ -1,0 +1,92 @@
+node* Merge(node *head1, node *head2) {
+  
+node *finalHead=NULL;
+node *finalTail=NULL;
+    
+    if(head1->data<=head2->data)
+      {
+      
+      finalTail=head1;
+      finalHead=head1; 
+      head1=head1->next;
+    }
+      else
+       {
+       
+        finalTail=head2;
+        finalHead=head2;
+        head2=head2->next;
+      }
+     
+while(head1!=NULL && head2!=NULL)
+  {
+   if(head1->data<=head2->data)
+    {
+      finalTail->next=head1;
+      finalTail=finalTail->next;
+      head1=head1->next;
+   }
+    else
+    {
+      finalTail->next=head2;
+       
+       finalTail=head2;
+       head2=head2->next;
+    }
+  }
+  
+  while(head1!=NULL)
+  {
+    finalTail->next=head1;
+    finalTail=finalTail->next;
+     head1=head1->next;
+  }
+ 
+   while(head2!=NULL)
+  {
+    
+     finalTail->next=head2;
+     finalTail=finalTail->next;
+     head2=head2->next;
+   }
+  
+return finalHead;
+}
+
+
+
+
+
+node * findMiddle(node * head)
+{
+    node *fast=head->next;
+    node *slow=head;
+    
+    if(head==NULL || head->next==NULL)
+     return head;
+    else
+    {
+     while(fast!=NULL && fast->next!=NULL)
+
+     {
+         fast=fast->next->next;
+         slow=slow->next;
+         
+     }
+  }
+  return slow;
+}
+node* mergeSort(node *head) {
+    
+    if(head==NULL  || head->next==NULL)
+    return head;
+    
+    node *mid = findMiddle(head);
+    node*half1=head,*half2=mid->next;
+    mid->next=NULL;
+    
+    half1=mergeSort(half1);
+    half2=mergeSort(half2);
+    
+    return Merge(half1,half2);
+}
