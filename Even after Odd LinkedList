@@ -1,0 +1,62 @@
+Sample Input 1 :
+1 4 5 2 -1
+Sample Output 1 :
+1 5 4 2 
+
+
+
+node* arrange_LinkedList(node* head)
+{
+    
+  node * oHead=NULL;
+  node * oTail=NULL;
+  node * eHead=NULL;
+  node * eTail=NULL;
+  
+  while(head!=NULL)
+  {
+    if((head->data)%2!=0)
+    {
+      if(oHead==NULL)
+      {
+        oHead=head;
+        oTail=head;
+        head=head->next;
+      }
+      else
+      {
+        oTail->next=head;
+        oTail=head;
+        head=head->next;
+      }
+    }
+    else    
+    {
+      if(eHead==NULL)
+      {
+        eHead=head;
+        eTail=head;
+        head=head->next;
+      }
+      
+      else{
+        eTail->next=head;
+        eTail=head;
+        head=head->next;
+      }
+    }
+  }
+  
+  
+  if(oHead==NULL)
+    return eHead;
+  else if(eHead==NULL)
+    return oHead;
+  else
+  { 
+    oTail->next=eHead;
+    eTail->next=NULL;
+    return oHead;
+  //write your code here
+ }
+}
