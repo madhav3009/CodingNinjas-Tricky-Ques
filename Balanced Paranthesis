@@ -1,0 +1,48 @@
+Sample Input 1 :
+{ a + [ b+ (c + d)] + (e + f) }
+Sample Output 1 :
+true
+
+
+
+#include<stack>
+bool checkBalanced(char *exp) {
+  stack <char> st;
+  char *tempExp=exp;
+  int size=0;
+  int i=0;
+  while(tempExp[i]!='\0')
+      
+  {
+    if(tempExp[i]=='('||tempExp[i]=='{'||tempExp[i]=='[')
+    {
+      st.push(tempExp[i]);
+     }
+   else if(tempExp[i]==')'||tempExp[i]=='}'||tempExp[i]==']')
+    {
+      if(st.size()==0)
+      return false;
+      else
+      {
+        char exp=st.top();
+        if(exp=='(' && tempExp[i]!=')')
+      return false;
+         if(exp=='{' && tempExp[i]!='}')
+      return false;
+             if(exp=='[' && tempExp[i]!=']')
+      return false;
+        st.pop();
+        
+      }
+     
+  }
+    i++;
+  }
+  
+  if(st.size()==0)
+    return true;
+  else 
+    return false;
+	// Write your code here
+
+}
