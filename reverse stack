@@ -1,0 +1,32 @@
+#include <stack>
+
+void reverseStack(stack<int> &input, stack<int> &extra) {
+	
+   if(input.size()<=1)
+    return;
+    
+    int x=input.top();
+    input.pop();
+    
+    reverseStack(input,extra);
+        
+     while(!input.empty())
+        {
+            int temp=input.top();
+            input.pop();
+            extra.push(temp);
+        }
+    
+       input.push(x);
+        
+      while(!extra.empty())
+        {
+           int temp=extra.top();
+            extra.pop();
+            input.push(temp);
+           
+        }
+        
+        
+    
+}
