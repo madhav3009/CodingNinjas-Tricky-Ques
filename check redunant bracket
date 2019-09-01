@@ -1,0 +1,50 @@
+Input (a + (b*c)) * (d * ( f * j)) 
+Output False
+
+#include<stack>
+bool checkRedundantBrackets(char *input) {
+	
+stack<char> st;
+int i=0;
+bool flag=false;    
+   while(input[i]!='\0')
+   {
+       if(input[i]!=')')
+           st.push(input[i]);
+        
+       else
+           
+       {
+           
+        while(st.top()!='(')
+        {
+            st.pop();
+            flag=true;
+            if(st.empty())
+            break;    
+            
+        }       
+       
+           if(st.empty())
+               continue;
+           
+           if(flag)
+           {
+               st.pop();
+               flag=false;
+               
+           }
+           
+           else
+           {
+               return true;
+           }   
+       }
+       
+   i++;
+   }
+return false;
+}
+
+  
+
