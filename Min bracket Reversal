@@ -1,0 +1,59 @@
+Input {{{{}}
+Output 1
+
+
+#include<stack>
+
+int length(char input[])
+{  
+    int len=0;
+    for(int i=0;input[i]!='\0';i++)
+    {
+        len++;
+    }
+    return len;
+}
+
+
+int countBracketReversals(char input[]){
+    
+    
+int len = length(input);
+if(len==0)
+    return 0;
+if(len%2!=0)
+    return -1;
+
+    
+stack<char> st;
+    
+for(int i=0;input[i]!='\0';i++)
+{
+    if(input[i]=='{')
+        st.push(input[i]);
+    
+    else
+    {
+        
+        if(!st.empty() && st.top()=='{')
+            st.pop();
+        else
+            st.push(input[i]);
+    }
+}
+
+    int count=0;
+    while(!st.empty())
+    {
+    
+    char c1=st.top();
+    st.pop();
+    char c2=st.top();
+     st.pop();
+    if(c1!=c2)
+        count+=2;
+    else
+        count+=1;
+    }
+    return count;
+}
