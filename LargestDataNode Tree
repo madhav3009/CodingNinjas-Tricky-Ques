@@ -1,0 +1,40 @@
+// Following is the given Tree node structure.
+/**************
+ template <typename T>
+ class TreeNode {
+    public:
+        T data;
+        vector<TreeNode<T>*> children;
+ 
+        TreeNode(T data) {
+            this->data = data;
+        }
+ 
+        ~TreeNode() {
+            for (int i = 0; i < children.size(); i++) {
+                delete children[i];
+            }
+        }
+ };
+***************/
+
+TreeNode<int>* maxDataNode(TreeNode<int>* root) {
+  queue<TreeNode<int>*>pendingNode;
+  pendingNode.push(root);
+  TreeNode<int>*MAX=root;
+  while(!pendingNode.empty())
+  {
+  
+    TreeNode<int>*F=pendingNode.front();
+    pendingNode.pop();
+    for(int i=0;i<F->children.size();i++)
+    {
+      pendingNode.push(F->children[i]);
+      if((F->children[i]->data)>MAX->data)
+      {
+       MAX=F->children[i]; 
+      } 
+    }
+  }
+  return MAX;
+}
