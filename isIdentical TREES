@@ -1,0 +1,49 @@
+Sample Input 1 :
+10 3 20 30 40 2 40 50 0 0 0 0 
+10 3 20 30 40 2 40 50 0 0 0 0
+Sample Output 1 :
+true
+
+
+// Following is the Tree node structure
+/**************
+template <typename T>
+class TreeNode {
+public:
+    T data;
+    vector<TreeNode<T>*> children;
+    
+    TreeNode(T data) {
+        this->data = data;
+    }
+    
+    ~TreeNode() {
+        for (int i = 0; i < children.size(); i++) {
+            delete children[i];
+        }
+    }
+};
+***************/
+
+bool isIdentical(TreeNode<int> *root1, TreeNode<int> * root2) {
+   if(root1==NULL && root2==NULL)
+       return true;
+    
+    if ((root1==NULL && root2!=NULL)||(root1!=NULL && root2==NULL)||(root1->data!=root2->data || root1->children.size()!=root2->children.size()))
+     return false;
+    
+    
+    int i=0;
+    while(i<root1->children.size())
+    {
+        TreeNode<int>* child1= root1->children[i];
+        TreeNode<int>* child2= root2->children[i];
+        
+        if(isIdentical(child1,child2))
+           i++;
+        else
+            return false;
+    }
+    
+    return true;
+}
