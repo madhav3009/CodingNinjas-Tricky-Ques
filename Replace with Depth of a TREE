@@ -1,0 +1,48 @@
+Sample Input 1 :
+10 3 20 30 40 2 40 50 0 0 0 0 
+Sample Output 1 : (Level wise, each level in new line)
+0 
+1 1 1 
+2 2
+
+
+// Following is the given Tree node structure
+/**************
+template <typename T>
+class TreeNode {
+public:
+    T data;
+    vector<TreeNode<T>*> children;
+    
+    TreeNode(T data) {
+        this->data = data;
+    }
+    
+    ~TreeNode() {
+        for (int i = 0; i < children.size(); i++) {
+            delete children[i];
+        }
+    }
+};
+***************/
+void replaceDepth(TreeNode<int>* root,int depth)
+{
+ 
+if(root==NULL)
+    return;
+root->data=depth;
+for(int i=0;i< root->children.size();i++)
+{
+    replaceDepth(root->children[i],depth+1);
+}
+    
+}
+
+void replaceWithDepthValue(TreeNode<int> *root){    
+
+    if(root==NULL)
+        return ;
+    
+    replaceDepth(root,0);
+}
+
