@@ -1,0 +1,54 @@
+Sample Input 1 :
+18
+10 3 20 30 40 2 40 50 0 0 0 0 
+Sample Output 1 :
+20
+
+
+
+// Following is the given Tree node structure
+/**************
+
+template <typename T>
+class TreeNode {
+public:
+    T data;
+    vector<TreeNode<T>*> children;
+    
+    TreeNode(T data) {
+        this->data = data;
+    }
+    
+    ~TreeNode() {
+        for (int i = 0; i < children.size(); i++) {
+            delete children[i];
+        }
+    }
+};
+***************/
+
+TreeNode<int>* nextLargerElement(TreeNode<int> *root, int n) {
+    
+    TreeNode<int>* nextLarger=NULL;
+    if(root==NULL)
+        return NULL;
+    if(root->data > n)
+        nextLarger=root;
+    
+    for(int i=0;i<root->children.size();i++)
+    {
+        TreeNode<int> * temp =nextLargerElement(root->children[i],n);
+        if(nextLarger==NULL)
+        nextLarger=temp;
+        
+        if(temp!=NULL && temp->data < nextLarger->data)
+            nextLarger=temp;
+        
+    }
+    
+    
+    
+    return nextLarger;
+
+}
+
