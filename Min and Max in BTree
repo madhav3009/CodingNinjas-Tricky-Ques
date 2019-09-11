@@ -1,0 +1,31 @@
+pair<int ,int> minMax(BinaryTreeNode<int>* root)
+{
+    pair<int,int> M;
+    M.first=INT_MAX;
+    M.second=INT_MIN;
+    if(root==NULL)
+    return M;
+
+    pair<int,int> lans=minMax(root->left);
+    pair<int,int> rans=minMax(root->right);
+
+    M.first=min(min(lans.first,rans.first),root->data);
+
+    M.second=max(max(lans.second,rans.second),root->data);
+
+    return M;
+
+
+}
+
+int main()
+{
+
+//after taking input
+pair<int,int>M=minMax(root);
+cout<<"MINIMUM"<<M.first<<endl;
+cout<<"MAXIMUM"<<M.second<<endl;
+return 0;
+
+
+}
