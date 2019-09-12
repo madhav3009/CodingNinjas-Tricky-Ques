@@ -1,0 +1,58 @@
+Sample Input :
+5 6 10 2 3 -1 -1 -1 -1 -1 9 -1 -1
+Sample Output :
+5 
+6 10 
+2 3 
+9
+
+
+// Following is the Binary Tree node structure
+/**************
+class BinaryTreeNode {
+    public : 
+    T data;
+    BinaryTreeNode<T> *left;
+    BinaryTreeNode<T> *right;
+
+    BinaryTreeNode(T data) {
+        this -> data = data;
+        left = NULL;
+        right = NULL;
+    }
+};
+
+***************/
+#include<queue>
+void printLevelATNewLine(BinaryTreeNode<int> *root) {
+    
+if(root==NULL)
+    return;
+    
+ queue<BinaryTreeNode<int> *>pendingNodes;
+    pendingNodes.push(root);
+    pendingNodes.push(NULL);
+    
+    while(!pendingNodes.empty())
+    {
+    BinaryTreeNode<int>* Front =pendingNodes.front();
+        pendingNodes.pop();
+    
+        if(Front==NULL)
+        {
+            if(pendingNodes.empty())
+                break;
+            
+            cout<<endl;
+            pendingNodes.push(NULL);
+            continue;
+        }
+        
+        cout<<Front->data<<" ";
+        if(Front->left!=NULL)
+            pendingNodes.push(Front->left);
+        if(Front->right!=NULL)
+            pendingNodes.push(Front->right);
+        
+    }
+}
