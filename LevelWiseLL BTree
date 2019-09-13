@@ -1,0 +1,102 @@
+Sample Input :
+5 6 10 2 3 -1 -1 -1 -1 -1 9 -1 -1
+Sample Output :
+5 
+6 10 
+2 3 
+9
+
+
+// Following is the Node and Binary Tree node structure
+
+/**************
+class node{
+public:
+    T data;
+    node<T> * next;
+    node(T data){
+        this->data=data;
+        this->next=NULL;
+    }
+};
+
+class BinaryTreeNode {
+    public : 
+    T data;
+    BinaryTreeNode<T> *left;
+    BinaryTreeNode<T> *right;
+
+    BinaryTreeNode(T data) {
+        this -> data = data;
+        left = NULL;
+        right = NULL;
+    }
+};
+
+***************/
+
+vector<node<int>*> createLLForEachLevel(BinaryTreeNode<int> *root) {
+   
+    queue<BinaryTreeNode<int>*> q;
+    q.push(root);
+    
+    node<int>*CLH=NULL;
+    node<int>*CLT=NULL;
+    int CLR=1,NLC=0;
+    
+    vector<node<int>*> output;
+    while(!q.empty())
+    {
+        BinaryTreeNode<int>* F = q.front();
+        q.pop();
+        
+        node<int>* newN = new node<int>(F->data);
+        
+        if(CLH==NULL)
+        {
+            CLH=newN;
+            CLT=newN;
+            
+        }
+        
+        else
+        {
+            CLT->next=newN;
+            CLT=newN;
+        }
+        
+        
+        if(F->left!=NULL)
+        {
+            q.push(F->left);
+            NLC++;
+        }
+            
+       
+        if(F->right!=NULL)
+        {
+            q.push(F->right);
+            NLC++;
+        }
+         
+        CLR--;
+        
+        if(CLR==0)
+        {
+            output.push_back(CLH);
+            CLH=NULL;
+            CLT=NULL;
+            CLR=NLC;
+            NLC=0;
+        }
+        
+    }
+    return output;
+    
+    
+    
+    
+    
+    
+
+}
