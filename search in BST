@@ -1,0 +1,35 @@
+Sample Input 2 :
+8 5 10 2 6 -1 -1 -1 -1 -1 7 -1 -1
+12
+Sample Output 2 :
+(empty)
+
+// Following is the Binary Tree node structure
+/**************
+class BinaryTreeNode {
+    public : 
+    T data;
+    BinaryTreeNode<T> *left;
+    BinaryTreeNode<T> *right;
+
+    BinaryTreeNode(T data) {
+        this -> data = data;
+        left = NULL;
+        right = NULL;
+    }
+};
+***************/
+
+BinaryTreeNode<int>* searchInBST(BinaryTreeNode<int> *root , int k){
+   if(root==NULL)
+       return NULL;
+    
+    if(root->data==k)
+        return root;
+    
+    if(k > root->data)
+        return searchInBST(root->right,k);
+    else
+        return searchInBST(root->left,k);
+    
+}
