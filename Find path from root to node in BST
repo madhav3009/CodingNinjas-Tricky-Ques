@@ -1,0 +1,56 @@
+Sample Input :
+8 5 10 2 6 -1 -1 -1 -1 -1 7 -1 -1
+2
+Sample Output :
+2
+5
+8
+
+
+// Following is the Binary Tree node structure
+/**************
+class BinaryTreeNode {
+    public : 
+    T data;
+    BinaryTreeNode<T> *left;
+    BinaryTreeNode<T> *right;
+
+    BinaryTreeNode(T data) {
+        this -> data = data;
+        left = NULL;
+        right = NULL;
+    }
+};
+***************/
+
+vector<int>* findPath(BinaryTreeNode<int> *root , int data){
+if(root==NULL)
+    return NULL;
+    
+if(root->data==data)
+{
+    vector<int>* output = new vector<int>;
+    output->push_back(root->data);
+    return output;
+    
+}
+    
+    if(data< root->data)
+    {
+        vector<int> *output = findPath(root->left,data);
+        if(output)
+            output->push_back(root->data);
+        
+return output; 
+    }
+    
+    if(data>root->data)
+    { 
+        vector<int>* output = findPath(root->right,data);
+        if(output)
+            output->push_back(root->data);
+    
+return output;  
+    }
+    
+}
