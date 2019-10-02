@@ -1,0 +1,49 @@
+Sample Input 1:
+5 10 6 2 3 -1 -1 -1 -1 -1 9 -1 -1
+2 10
+Sample Output 1:
+10
+Sample Input 2:
+5 10 6 2 3 -1 -1 -1 -1 -1 9 -1 -1
+2 6
+Sample Output 2:
+5
+Sample Input 3:
+5 10 6 2 3 -1 -1 -1 -1 -1 9 -1 -1
+12 78
+Sample Output 3:
+-1
+
+
+BinaryTreeNode<int>* lcaBinaryTreeHelper(BinaryTreeNode<int> *root , int a, int b){
+if(root==NULL) {
+return NULL;
+}
+    
+    
+if(root -> data == a || root -> data == b) {
+return root;
+}
+    
+BinaryTreeNode<int> *left_lca = lcaBinaryTreeHelper(root -> left, a, b);
+    
+BinaryTreeNode<int> *right_lca = lcaBinaryTreeHelper(root -> right, a, b);
+
+if(left_lca && right_lca){
+return root;
+}
+else if(left_lca) 
+return left_lca;
+else
+return right_lca;
+}
+
+
+int lcaBinaryTree(BinaryTreeNode <int> *root , int val1, int val2){
+
+BinaryTreeNode<int> *node = lcaBinaryTreeHelper(root, val1, val2);
+if(node != NULL)
+return node -> data;
+else
+return -1;
+}
