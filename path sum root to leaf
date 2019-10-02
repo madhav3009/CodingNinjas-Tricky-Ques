@@ -1,0 +1,55 @@
+Sample Input 1 :
+5 6 7 2 3 -1 1 -1 -1 -1 9 -1 -1 -1 -1
+13
+Sample Output 1 :
+5 6 2
+5 7 1
+
+
+
+// Following is the Binary Tree node structure
+/**************
+class BinaryTreeNode {
+    public : 
+    T data;
+    BinaryTreeNode<T> *left;
+    BinaryTreeNode<T> *right;
+
+    BinaryTreeNode(T data) {
+        this -> data = data;
+        left = NULL;
+        right = NULL;
+    }
+};
+***************/
+
+#include <vector>
+
+void rootToLeafPathsSumToK(BinaryTreeNode<int> *root, vector<int> &path, int k) {
+if(root == NULL) {
+return;
+}
+    
+k = k - root -> data;
+    
+path.push_back(root -> data);
+if(root -> left == NULL && root -> right == NULL) {
+if(k == 0) {
+for(int i = 0; i < path.size(); i++) {
+cout << path[i] << " ";
+}
+cout << endl;
+}
+path.pop_back();
+return;
+}
+rootToLeafPathsSumToK(root -> left, path, k);
+rootToLeafPathsSumToK(root -> right, path, k);
+path.pop_back();
+}
+
+
+void rootToLeafPathsSumToK(BinaryTreeNode<int> *root, int k) {
+vector<int> path;
+rootToLeafPathsSumToK(root, path, k);
+}
