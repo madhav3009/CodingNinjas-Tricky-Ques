@@ -1,0 +1,39 @@
+Sample Input :
+8 5 10 2 6 -1 -1 -1 -1 -1 7 -1 -1
+Sample Output :
+8 
+8 10 
+5 10 
+5 6 
+2 6 7 
+2 7
+
+// Following is the Binary Tree node structure
+/**************
+class BinaryTreeNode {
+    public : 
+    T data;
+    BinaryTreeNode<T> *left;
+    BinaryTreeNode<T> *right;
+
+    BinaryTreeNode(T data) {
+        this -> data = data;
+        left = NULL;
+        right = NULL;
+    }
+};
+***************/
+
+void insertDuplicateNode(BinaryTreeNode<int> *root) {
+if(root == NULL) {
+return;
+}
+    
+BinaryTreeNode<int> *newNode = new BinaryTreeNode<int>(root -> data);
+
+BinaryTreeNode<int> *rootLeft = root -> left;
+root -> left = newNode;
+newNode -> left = rootLeft;
+insertDuplicateNode(rootLeft);
+insertDuplicateNode(root -> right);
+}
