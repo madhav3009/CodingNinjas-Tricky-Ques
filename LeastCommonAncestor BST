@@ -1,0 +1,63 @@
+Sample Input 1:
+8 5 10 2 6 -1 -1 -1 -1 -1 7 -1 -1
+2 10
+Sample Output 1:
+8
+Sample Input 2:
+8 5 10 2 6 -1 -1 -1 -1 -1 7 -1 -1
+2 6
+Sample Output 2:
+5
+Sample Input 3:
+8 5 10 2 6 -1 -1 -1 -1 -1 7 -1 -1
+12 78
+Sample Output 3:
+-1
+
+// Following is the Binary Tree node structure
+/**************
+class BinaryTreeNode {
+    public : 
+    T data;
+    BinaryTreeNode<T> *left;
+    BinaryTreeNode<T> *right;
+
+    BinaryTreeNode(T data) {
+        this -> data = data;
+        left = NULL;
+        right = NULL;
+    }
+};
+***************/
+
+BinaryTreeNode<int>* lcaInBSTHelper(BinaryTreeNode<int>* root , int a , int b){
+if(!root)
+return NULL;
+if(root -> data == a || root -> data == b) {
+return root;
+}
+if(root -> data < a && root -> data < b) {
+return lcaInBSTHelper(root -> right, a, b);
+}
+else if(root -> data > a && root -> data > b){
+return lcaInBSTHelper(root -> left, a, b);
+}
+else {
+BinaryTreeNode<int> *left_lca = lcaInBSTHelper(root -> left, a, b);
+BinaryTreeNode<int> *right_lca = lcaInBSTHelper(root -> right, a, b);
+if(left_lca && right_lca){
+return root;
+}
+else if(left_lca)
+return left_lca;
+else
+return right_lca;
+}
+}
+int lcaInBST(BinaryTreeNode<int> *root , int val1 , int val2){
+BinaryTreeNode<int> *node = lcaInBSTHelper(root, val1, val2);
+if(node != NULL)
+return node -> data;
+else
+return -1;
+}
