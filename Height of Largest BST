@@ -1,0 +1,91 @@
+Sample Input 1:
+5 10 6 2 3 -1 -1 -1 -1 -1 9 -1 -1
+Sample Output 1:
+2
+
+
+// Following is the Binary Tree node structure
+/**************
+class BinaryTreeNode {
+    public : 
+    T data;
+    BinaryTreeNode<T> *left;
+    BinaryTreeNode<T> *right;
+
+    BinaryTreeNode(T data) {
+        this -> data = data;
+        left = NULL;
+        right = NULL;
+    }
+};
+***************/
+#include<climits>
+#include<cmath>
+
+
+class BSTreturn
+{
+    
+    public:
+    int min,max,height;
+    bool isBST;
+    
+};
+
+BSTreturn helper(BinaryTreeNode<int>* root)
+{
+    if(root==NULL)
+    {
+        
+        BSTreturn ans;
+        ans.min=INT_MAX;
+        ans.max=INT_MIN;
+        ans.height=0;
+        ans.isBST=true;
+        return ans;
+    }
+    
+    
+    BSTreturn Left = helper(root->left); 
+    BSTreturn Right = helper(root->right);
+    
+    if(!(Left.isBST && Left.max < root->data))
+        Left.isBST=false;
+    
+    if(!(Right.isBST && Right.min > root->data))
+        Right.isBST=false;
+    
+    
+    if(!Left.isBST || !Right.isBST ||  root->data >Right.min ||  root->data <Left.max)
+    {
+        if(Left.height>Right.height)
+        {
+            Left.isBST=false;
+            return Left;
+            
+        }
+        
+        else
+        {
+            Right.isBST=false;
+            return Right;
+        }
+        
+    }
+    BSTreturn ans;
+    ans.isBST=true;
+    ans.min=min(Left.min,min(root->data,Right.min));
+    ans.max=max(Left.max,max(root->data,Right.max));
+    ans.height=max(Left.height,Right.height)+1;
+    return ans;
+    
+    
+    
+}
+
+int largestBSTSubtree(BinaryTreeNode<int> *root) {
+ 
+    return helper(root).height;
+    
+
+}
