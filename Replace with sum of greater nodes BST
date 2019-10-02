@@ -1,0 +1,39 @@
+Sample Input 1 :
+8 5 10 2 6 -1 -1 -1 -1 -1 7 -1 -1
+Sample Output 1 :
+18 
+36 10 
+38 31 
+25 
+
+
+// Following is the Binary Tree node structure
+/**************
+class BinaryTreeNode {
+    public : 
+    T data;
+    BinaryTreeNode<T> *left;
+    BinaryTreeNode<T> *right;
+
+    BinaryTreeNode(T data) {
+        this -> data = data;
+        left = NULL;
+        right = NULL;
+    }
+};
+***************/
+
+int replaceWithLargerNodesSum(BinaryTreeNode<int> *root, int sum) {
+if (root == NULL)
+return sum;
+    
+sum = replaceWithLargerNodesSum(root -> right, sum);
+sum += root -> data;
+root -> data = sum;
+sum = replaceWithLargerNodesSum(root -> left, sum);
+    return sum;
+}
+
+void replaceWithLargerNodesSum(BinaryTreeNode<int> *root) {
+replaceWithLargerNodesSum(root,0);
+}
