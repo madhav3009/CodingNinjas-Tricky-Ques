@@ -1,0 +1,74 @@
+Sample Input 1:
+5 10 6 2 3 -1 -1 -1 -1 -1 9 -1 -1
+15
+Sample Output 1:
+5 10
+6 9
+
+
+
+#include<algorithm>
+#include<vector>
+
+
+// Following is the Binary Tree node structure
+/**************
+class BinaryTreeNode {
+    public : 
+    T data;
+    BinaryTreeNode<T> *left;
+    BinaryTreeNode<T> *right;
+
+    BinaryTreeNode(T data) {
+        this -> data = data;
+        left = NULL;
+        right = NULL;
+    }
+};
+***************/
+void convertBTtoArr(BinaryTreeNode<int> *root , vector<int> &output)
+{
+ if(root==NULL)
+     return;
+    
+    output.push_back(root->data);
+    convertBTtoArr(root->left,output);
+    convertBTtoArr(root->right,output);
+    
+    
+}
+
+
+void nodesSumToS(BinaryTreeNode<int> *root, int sum) {
+
+    vector<int> output;
+    convertBTtoArr(root,output);
+    sort(output.begin(),output.end());
+    
+    int i=0,j=output.size()-1;
+    
+    while(i<j)
+    {
+        
+        if(output[i]+output[j]==sum)
+        {
+            cout<<output[i]<<" "<<output[j]<<endl;
+            i++;
+            j--;
+        }
+        
+        else if(output[i]+output[j]>sum)
+        {
+            j--;
+        }
+        else
+        {
+            i++;
+        }
+        
+        
+    }
+    
+    
+    
+}
