@@ -1,0 +1,45 @@
+Ai contains all non-zero values
+Sample Input:
+5
+2 1 -2 2 3
+Sample Output :
+-2 2
+-2 2
+
+ 	#include<map>
+    #include<cmath>
+
+    void PairSum(int *input, int n) {	 
+		
+   map<int,int> mapobj;
+   for(int i=0;i<n;i++)
+   {
+       int key=input[i];
+       if(mapobj.count(key)==0)
+           mapobj[key]=1;
+       else
+           mapobj[key]++;
+   }
+        
+        for(int i=0;i<n;i++)
+        {
+        
+        int key=input[i];
+        if(mapobj[key]!=0 && mapobj.count(-key)!=0)    
+        {
+            
+        
+        int times=mapobj[key]*mapobj[-key];
+        
+        while(times!=0)
+        {
+            cout<<min(key,-key)<<" "<<max(key,-key)<<endl;times--;
+        }
+        
+        mapobj[key]=0;
+        mapobj[-key]=0;
+        
+        }
+        }	
+ 	}
+
