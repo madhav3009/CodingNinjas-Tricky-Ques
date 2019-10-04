@@ -1,0 +1,38 @@
+Sample Input 1 :
+6
+2 6 8 5 4 3
+4
+2 3 4 7 
+Sample Output 1 :
+2 
+4 
+3
+
+// input1 - first array
+// input2 - second array
+// size1 - size of first array
+// size2 - size of second array
+#include<map>
+void intersection(int input1[], int input2[], int size1, int size2) {
+
+    map<int,int> mapobj;
+    for(int i=0;i<size1;i++)
+    {
+        int key=input1[i];
+        if(mapobj.count(key)==0)
+            mapobj[key]=1;
+        else
+            mapobj[key]++;
+    }
+    
+    for(int i=0;i<size2;i++)
+    {
+     if(mapobj[input2[i]]>0)
+      {
+         cout<<input2[i]<<endl;
+         mapobj[input2[i]]--;
+      }
+    }
+    
+    
+}
