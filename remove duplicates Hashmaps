@@ -1,0 +1,54 @@
+Input
+1,2,2,3,4,5,6,7,1,8
+
+output
+1 2 3 4 5 6 7 8
+
+
+#include <iostream>
+#include<vector>
+#include<map>
+
+
+using namespace std;
+
+
+vector<int> removeDup(int *arr, int n)
+{
+    vector<int> output;
+
+    map<int,bool> mapobj;
+    for(int i=0;i<n;i++)
+    {
+       int key=arr[i];
+       if(mapobj.count(key)>0)
+        continue;
+       else{
+        mapobj[key]=true;
+        output.push_back(key);
+
+       }
+
+
+    }
+
+    return output;
+
+
+}
+
+int main()
+{
+    int arr[]={1,2,2,3,4,5,6,7,1,8};
+    vector<int> ans =  removeDup(arr,10);
+    for(int i=0;i<ans.size();i++)
+    {
+
+        cout<<ans[i]<<" ";
+
+    }
+
+
+
+
+}
