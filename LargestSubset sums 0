@@ -1,0 +1,32 @@
+Sample Input :
+10 
+ 95 -97 -387 -435 -5 -70 897 127 23 284
+Sample Output :
+5
+ 
+using namespace std;
+
+int lengthOfLongestSubsetWithZeroSum(int* arr, int size){
+int maxLen=0;
+ for(int i=0;i<size;i++)
+ {
+    int currSum=0;
+    for(int j=i;j<size;j++)
+    {
+        currSum+=arr[j];
+        if(currSum==0)
+            maxLen=max(maxLen,j-i+1);
+        
+            
+        
+    }
+     
+     
+ }
+    return maxLen;
+    
+}
+
+
+Complexity N*N
+Can be optimized to N by hashtables
