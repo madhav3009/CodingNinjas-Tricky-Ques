@@ -1,0 +1,58 @@
+Sample Input 1 :
+4 
+5 1 2 4
+3
+Sample Output 1 :
+2 5
+1 4
+
+
+#include<map>
+
+void printPairs(int *input, int n, int k) {
+
+    map<int,int> m;
+    
+    for(int i=0;i<n;i++)
+        m[input[i]]++;
+    
+    for(int i=0;i<n;i++)
+    {
+      int key=input[i];
+      
+        if(k==0)
+        {
+            int a=m[key];
+            int count=((a-1)*a)/2;
+            while(count>0)
+            {
+              cout<<key<<" "<<key<<endl;
+              count--;
+            }
+            
+        }
+        
+        else
+        {
+            int a=key+k;
+            int b=key-k;
+            
+            int count=m[key];
+            int count1=m[a];
+            int count2=m[b];
+            
+            for(int i=0;i<count*count1;i++)
+                cout<<min(a,key)<<" "<<max(a,key)<<endl;
+            for(int i=0;i<count*count2;i++)
+                cout<<min(b,key)<<" "<<max(b,key)<<endl;
+            
+            
+            
+        }
+        m.erase(key);
+    }
+    
+    
+}
+
+
