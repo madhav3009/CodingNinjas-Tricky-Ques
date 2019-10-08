@@ -1,0 +1,68 @@
+#include <iostream>
+
+using namespace std;
+
+
+int fiboNormal(int n)
+{
+
+   if(n<=1) return n;
+   return fiboNormal(n-1)+fiboNormal(n-2);
+
+}
+
+int fiboMemoiHelp(int arr[],int n)
+{
+
+    if(n<=1)
+        return n;
+    if(arr[n]!=-1)
+        return arr[n];
+
+    else
+    {
+
+        int a=fiboMemoiHelp(arr,n-1);
+        int b=fiboMemoiHelp(arr,n-2);
+        arr[n]=a+b;
+        return arr[n];
+
+    }
+}
+
+int fiboMemoi(int n)
+{
+   int * arr = new int[n+1];
+   for(int i=0;i<=n;i++)
+    arr[i]=-1;
+
+   return fiboMemoiHelp(arr,n);
+
+}
+
+int fiboDPro(int n)
+{
+    int *arr=new int[n+1];
+    arr[0]=0;
+    arr[1]=1;
+
+    for(int i=2;i<=n;i++)
+        arr[i]=arr[i-1]+arr[i-2];
+
+    return arr[n];
+
+}
+int main()
+{
+    int n;
+    cin>>n;
+
+    cout<<fiboNormal(n)<<" complexity 2^N"<<endl;
+
+    cout<<fiboMemoi(n)<<" complexity N"<<endl;
+
+    cout<<fiboDPro(n)<<" Complexity N"<<endl;
+
+
+    return 0;
+}
