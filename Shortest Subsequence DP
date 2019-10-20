@@ -1,0 +1,76 @@
+Sample Input :
+babab
+babba
+Sample Output :
+3
+
+int helper(string S , string V, int siS, int siV , int ** dp)
+{
+    
+    if(siS==S.length())
+        return 1001;
+    
+    if(siV==V.length())
+        return 1;
+    
+    if(dp[siS][siV]!=-1)
+        return dp[siS][siV];
+    
+    int option1 = helper(S,V,siS+1,siV,dp);
+    
+    
+    int index=-1;
+    for(int i=siV;i<V.length();i++)
+    {
+        if(V[i]==S[siS])
+        {
+            index=i;
+            break;
+        }
+    }
+    
+    if(index==-1)
+        return 1;
+    
+    
+    int option2 = 1 + helper( S,V, siS+1 , index+1 , dp);
+    
+    int ans=0;
+    if(option1 <option2)
+     ans=option1;
+    else
+        ans=option2;
+    
+    dp[siS][siV]=ans;
+    return ans;
+    
+    
+}
+
+
+int solve(string S,string V)
+{
+	int **dp = new int *[S.length()];
+    for(int i=0;i<S.length();i++)
+    {
+        dp[i]=new int[V.length()];
+        for(int j=0;j<V.length();j++)
+        dp[i][j]=-1;
+     }
+    
+    int ans = helper(S,V,0,0,dp);
+    
+    for(int i=0;i<S.length();i++)
+    {
+        delete []dp[i];
+        
+    }
+    
+    delete []dp;
+   
+    
+    
+    return ans;
+    
+    
+}
