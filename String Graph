@@ -1,0 +1,95 @@
+Coding Ninjas
+Send Feedback
+Given a NxM matrix containing Uppercase English Alphabets only. Your task is to tell if there is a path in the given matrix which makes the sentence “CODINGNINJA” .
+There is a path from any cell to all its neighbouring cells. A neighbour may share an edge or a corner.
+Input Format :
+Line 1 : Two space separated integers N  and M, where N is number of rows and M is number of columns in the matrix.
+Next N lines : N rows of the matrix. First line of these N line will contain 0th row of matrix, second line will contain 1st row and so on
+Assume input to be 0-indexed based
+Output Format :
+Return 1 if there is a path which makes the sentence “CODINGNINJA” else return 0.
+Constraints :
+1 <= N <= 100
+1 <= M <= 100
+Sample Input :
+2 11
+CXDXNXNXNXA
+XOXIXGXIXJX
+Sample Output :
+1
+
+#include<string>
+
+int l=0;
+
+void solveHelper(char Graph[][MAXN] ,int N,int M,int i,int j, string S ,int **visited)
+{
+ 
+    if(S.size()==0)
+       
+    {   
+        l++;
+        return;
+    }
+    
+    
+    if(i<0 || i>=N || j<0 || j>=M)
+        return ;
+    
+    if(visited[i][j]== 1)
+        return;
+    
+   
+    if(S[0]!=Graph[i][j])
+        return;
+    
+    visited[i][j]=1;
+    
+    solveHelper(Graph,N,M,i-1,j,S.substr(1),visited);
+    solveHelper(Graph,N,M,i+1,j,S.substr(1),visited);
+    solveHelper(Graph,N,M,i,j-1,S.substr(1),visited);
+    solveHelper(Graph,N,M,i,j+1,S.substr(1),visited);
+    solveHelper(Graph,N,M,i+1,j-1,S.substr(1),visited);
+    solveHelper(Graph,N,M,i+1,j+1,S.substr(1),visited);
+    solveHelper(Graph,N,M,i-1,j-1,S.substr(1),visited);
+    solveHelper(Graph,N,M,i-1,j+1,S.substr(1),visited);
+    
+    visited[i][j]=0;
+}
+
+
+int solve(char Graph[][MAXN],int N, int M)
+{
+    string S = "CODINGNINJA";
+    int **visited = new int*[N];
+    for(int i=0;i<N;i++)
+    {
+        visited[i] = new int[M];
+        for(int j=0;j<M;j++)
+        {
+            visited[i][j]=0;
+            
+        }
+        
+    }
+    
+    
+    
+    for(int i=0;i<N;i++)
+    {
+        for(int j=0;j<M;j++)
+        {
+            if(Graph[i][j]==S[0])
+            {
+                solveHelper(Graph,N,M,i,j,S,visited);
+                if(l>0)
+                 return 1;
+            }
+        }
+    }
+    
+    return 0;
+    
+    
+    
+}
