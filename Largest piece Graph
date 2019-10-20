@@ -1,0 +1,59 @@
+Largest Piece
+Send Feedback
+Its Gary's birthday today and he has ordered his favourite square cake consisting of '0's and '1's . But Gary wants the biggest piece of '1's and no '0's . A piece of cake is defined as a part which consist of only '1's, and all '1's share an edge with eachother on the cake. Given the size of cake N and the cake , can you find the size of the biggest piece of '1's for Gary ?
+Constraints :
+1<=N<=50
+Input Format :
+Line 1 : An integer N denoting the size of cake 
+Next N lines : N characters denoting the cake
+Output Format :
+Size of the biggest piece of '1's and no '0's
+Sample Input :
+2
+11
+01
+Sample Output :
+3
+
+
+int d[50][50]={{0}};
+
+int ma=0;
+int sexy(int n,char cake[][55],int i,int j)
+{ 
+    if (i<0||i>=n||j<0||j>=n) return 0;
+    
+    if (d[i][j]==1) return 0;
+    
+    if (cake[i][j]=='0') return 0;
+    
+    int t=0;
+    
+    d[i][j]=1;
+    
+    t+=sexy(n,cake,i+1,j);
+    t+=sexy(n,cake,i,j-1);
+    t+=sexy(n,cake,i-1,j);
+    t+=sexy(n,cake,i,j+1);
+
+    return t+1;
+    
+    
+}
+
+int solve(int n,char cake[][55])
+{    
+    int k;
+    for (int i=0;i<n;i++)
+     {  
+    for (int j=0;j<n;j++) 
+    { 
+        if(d[i][j]==0 && cake[i][j]=='1') 
+        k=sexy(n,cake,i,j); 
+        if (k>ma) ma=k; 
+    }
+    
+  }
+	
+      return ma;
+}
