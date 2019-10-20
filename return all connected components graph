@@ -1,0 +1,99 @@
+Sample Input 2:
+4 3
+0 1
+1 3 
+0 3
+Sample Output 2:
+0 1 3 
+2
+
+#include <iostream>
+#include<queue>
+#include<stack>
+#include<map>
+#include<set>
+using namespace std;
+map<int,int> ma;
+set<int> se;
+void print(int **d,int n,int s,int* vi)
+{   queue<int> q;
+    q.push(s); vi[s]=1;
+    while (q.size()!=0)
+    { int t=q.front(); se.insert(t);
+        q.pop();
+        for (int i=0;i<n;i++)
+        { if (vi[i]==0&&d[t][i]==1) { vi[i]=1; q.push(i);  }
+
+        }
+    }
+    set<int>::iterator it;
+    for (it=se.begin();it!=se.end(); it++) cout<<*it<<" "; cout<<endl;
+    se.clear();
+}
+int t=0;
+stack<int> st;
+void printdfs(int **d,int n,int s,int e,int * vi)
+{ if (vi[s]==1) return ;
+   else vi[s]=1;
+   st.push(s);
+   if (s==e) { while (st.size()!=0) { cout<<st.top()<<" "; st.pop();    }  t++; return ;   }
+   for (int i=0;i<n;i++)
+   { if (t!=0) return ;
+       if (d[s][i]==1&&vi[i]==0) printdfs(d,n,i,e,vi);
+   }
+   if (t!=0) return ;
+   st.pop();
+}
+
+void printis(int **edge,int n,int s,int *vi)
+{
+    queue<int> q;
+    q.push(s); vi[s]=1; ma[s]=s;
+    while (q.size()!=0)
+    { int t=q.front();
+        q.pop();
+        for (int i=0;i<n;i++)
+        { if (vi[i]==0&&edge[t][i]==1) { q.push(i); vi[i]=1;   }
+
+        }
+
+        }
+}
+
+int main() {
+    int n,e;
+    int i;
+    cin >>n>>e;
+    int **edge=new int*[n];
+    for (i=0;i<n;i++)
+    {
+        edge[i]=new int[n];
+        for(int j=0;j<n;j++) edge[i][j]=0;
+    }
+    for (i=0;i<e;i++)
+    { int f,s;
+      cin>>f>>s;
+      edge[f][s]=1;
+      edge[s][f]=1;
+    }
+    int* vi=new int [n];
+    for (i=0;i<n;i++) vi[i]=0;
+     se.clear();
+     for (i=0;i<n;i++)
+     { if (vi[i]==0)
+         { print(edge,n,i,vi);
+
+         }
+        }
+
+
+
+
+
+
+
+    for(int i=0;i<n;i++) delete []edge[i];
+    delete []edge;
+
+  return 0;
+}
