@@ -1,0 +1,96 @@
+Sample Input 2:
+4 3
+0 1
+1 3 
+0 3
+Sample Output 2:
+false 
+
+#include <iostream>
+#include<queue>
+
+
+using namespace std;
+
+
+void isConnectedHelper(int ** edges, int V,int sv, bool *visited)
+{
+    queue<int> pv;
+    pv.push(sv);
+    visited[sv]=true;
+    
+    while(!pv.empty())
+    {
+        int currV=pv.front();
+        pv.pop();
+        for(int i=0;i<V;i++)
+        {
+            
+        if(edges[currV][i]==1 && !visited[i])
+        {
+            pv.push(i);
+            visited[i]=true;
+            
+        }
+    }
+}
+    
+    
+}
+
+bool isConnected(int **edges,int V)
+{
+   bool * visited=new bool[V];
+    for(int i=0;i<V;i++)
+    {
+        visited[i]=false;
+        
+    }
+     
+      isConnectedHelper(edges,V,0,visited);
+      
+          
+        for(int i=0;i<V;i++)
+        {
+           if(visited[i]==false)
+               return false;
+        }
+    return true;
+    
+    
+}
+    
+int main() {
+    int V, E;
+    cin >> V >> E;
+     int**edges= new int*[V];
+    
+    for(int i=0;i<V;i++)
+    {
+        edges[i]=new int[V];
+        for(int j=0;j<V;j++)
+            edges[i][j]=0;
+        
+    }
+ 
+    
+    for(int i=0;i<E;i++)
+    {
+        
+        int a,b;
+        cin>>a>>b;
+        
+        edges[a][b]=1;
+        edges[b][a]=1;
+        
+    }
+    
+    bool ans =isConnected(edges,V);
+    if(ans)
+        cout<<"true";
+    else
+       cout<<"false";
+    
+    
+  return 0;
+}
