@@ -1,0 +1,83 @@
+4 4
+0 1
+0 3
+1 2
+2 3
+1 3
+Sample Output 1 :
+3 0 1
+
+
+#include <iostream>
+#include<vector>
+using namespace std;
+
+vector<int> *getPathDFS(int ** edges,int V,int tempX,int tempY,bool * visited)
+{
+    if(tempX==tempY)
+    {
+        vector<int>* output = new vector<int>();
+        output->push_back(tempY);
+        return output;
+    }
+    
+    visited[tempX]=true;
+    
+    for(int i=0;i<V;i++)
+    {
+        if(edges[tempX][i]==1 && !visited[i])
+        {
+            vector <int> * smallOutput = getPathDFS(edges,V,i,tempY,visited);
+            if(smallOutput)
+            {
+            smallOutput->push_back(tempX);
+            return smallOutput;
+            }
+        }
+    }
+    return NULL;
+    
+}
+    
+int main()
+{
+  int V, E, tempX, tempY;
+  cin >> V >> E;
+  int ** edges= new int *[V];
+    for(int i=0;i<V;i++)
+ 
+    {
+        edges[i]=new int[V];
+    for(int j=0;j<V;j++)
+        edges[i][j]=0;
+    }
+    
+    for(int i=0;i<E;i++)
+    {
+        int a,b;
+        cin>>a>>b;
+        edges[a][b]=1;
+        edges[b][a]=1;
+    }
+    
+     cin>>tempX>>tempY;
+       
+    bool * visited= new bool[V];
+    for(int i=0;i<V;i++)
+        visited[i]=false;
+    
+    vector<int>* ans=getPathDFS(edges,V,tempX,tempY,visited);
+    if(ans)
+    {
+    for(int i=0;i<ans->size();i++)
+    cout<<ans->at(i)<<" ";
+    }
+    
+    
+    
+    
+    
+
+  return 0;
+}
+
